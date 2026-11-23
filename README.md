@@ -1,7 +1,7 @@
 # Herdr zro setup
 
 This repo contains my personal Herdr desktop setup, based on Herdr 0.1.16. On
-this Mac, `~/.config/herdr-app` is a symlink to `~/dev/herdr-setup/config`.
+this Mac, `~/.config/herdr-app` is a symlink to `~/dev/personal/herdr/config`.
 Edits under `config/` affect the live app.
 
 | Path | Contents |
