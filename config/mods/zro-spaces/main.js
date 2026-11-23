@@ -529,10 +529,10 @@ export default class Spaces extends View {
       .flex_none()
       .justify_center()
       .rounded(8)
-      .bg("#164653")
-      .when(Boolean(tree), el => el.ml(24).bg("#191919").rounded(5))
+      .bg("#272727")
+      .when(Boolean(tree), el => el.ml(24).rounded(5))
       .when(on, (el) => el.bg(t.selected))
-      .when(!on, (el) => el.hover((s) => s.bg(tree ? "#101010" : "#1D5664")))
+      .when(!on, (el) => el.hover((s) => s.bg(t.hover)))
       .when(this.pressed === w.id && this.over !== w.id, (el) => el.opacity(0.5))
       .when(this.pressed !== null && this.over === w.id && this.pressed !== w.id, (el) => el.child(
         div().absolute().left(0).right(0).h(2).bg(t.accent)
@@ -651,7 +651,7 @@ export default class Spaces extends View {
       .when(visible, el => el.child(globalThis.window.paint_path(
         PathBuilder.fill().move_to("0%", "0%").line_to("100%", "0%")
           .line_to("100%", "100%").line_to("0%", "100%").close().build(),
-        Background.linear_gradient(60, Background.stop("#000000", 0.7), Background.stop(t.done, 1))
+        Background.linear_gradient(60, Background.stop("#272727", 0.7), Background.stop(t.done, 1))
       ).absolute().top(0).left(0).size_full()));
   }
 
@@ -679,7 +679,7 @@ export default class Spaces extends View {
     row.child(div().flex_1().min_w(0).truncate().text_size(14).text_color(on ? t.foreground : t.muted).child(collapsed ? name.slice(0, 1) : label));
     if (status !== "working" && !attention) row.child(div().size(6).flex_none().rounded(3).when(status === "idle", el => el.border(1).border_color(color)).when(status !== "idle", el => el.bg(color)));
     if (collapsed) return div().id(`nested-agent-${a.address}`).relative().overflow_hidden().rounded(4)
-      .cursor_pointer().border(1).border_color(on ? t.accent : t.border).bg(t.surface)
+      .cursor_pointer().border(1).border_color(on ? t.accent : t.border).bg("#272727")
       .on_size_change((size, cx) => this.measureCard(a.address, size, cx))
       .when(!showGradient, el => el.hover(el => el.bg(t.hover))).on_click(activate).on_mouse_down("right", renameMenu)
       .child(this.attentionBackground(a.address, t, showGradient))
@@ -691,7 +691,7 @@ export default class Spaces extends View {
     const old = known && Date.now() / 1000 - data.updatedAt > 300;
     const description = known ? `Context used: ${Math.round(used)}%${old ? " · last reported value" : ""}` : "Context usage unavailable";
     return v_flex().id(`nested-agent-${a.address}`).relative().overflow_hidden().flex_none().ml(Math.max(0, indent - 8)).my(4)
-      .rounded(5).border(1).border_color(t.border).cursor_pointer().bg(t.surface)
+      .rounded(5).border(1).border_color(t.border).cursor_pointer().bg("#272727")
       .when(on, el => el.border_color(t.accent)).when(!showGradient, el => el.hover(el => el.bg(t.hover)))
       .tooltip(`${name} · ${label} — ${status || "unknown"}`).on_click(activate).on_mouse_down("right", renameMenu)
       .child(this.attentionBackground(a.address, t, showGradient))
@@ -726,7 +726,7 @@ export default class Spaces extends View {
       this.revealedAt = this.activeAt;
       if (this.activeAt >= 0) this.scroll.scroll_to_item(this.activeAt);
     }
-    return v_flex().size_full().min_h(0).bg("#272727").text_size(15)
+    return v_flex().size_full().min_h(0).bg(t.background).text_size(15)
       .child(h_flex().h(41).pl(16).pr(10).items_center().justify_between().text_size(13.5).text_color(t.dim)
         .when(collapsed, el => el.pl(0).pr(0).justify_center())
         .when(!collapsed, el => el.child("Spaces"))
