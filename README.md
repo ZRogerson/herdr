@@ -7,7 +7,7 @@ Edits under `config/` affect the live app.
 | Path | Contents |
 | --- | --- |
 | `config/layouts/zro.json` and `zro.svg` | zro layout and preview |
-| `config/themes/tron-grid.json` | Tron Grid theme |
+| `config/themes/zro-grid.json` | Zro Grid theme |
 | `config/mods/` | Supporting mods and their assets |
 | `config/keys.json` and `config/settings.json` | Shortcuts and app preferences |
 
@@ -33,7 +33,7 @@ projects and contributors.
 | `master-new-menu` | Adapted from Herdr’s New Menu mod |
 | `master-tabs` | Adapted from Herdr’s Tabs mod |
 | `master-worktree` | Adapted from Herdr’s Worktree mod |
-| `tron-spaces` | Adapted from Herdr’s Spaces mod |
+| `zro-spaces` | Adapted from Herdr’s Spaces mod |
 | `agent-name-menu` | Setup-specific menu for agent names |
 
 The Drover notices also credit the icon projects whose assets they use.

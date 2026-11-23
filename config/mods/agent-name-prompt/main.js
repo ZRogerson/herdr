@@ -21,10 +21,10 @@ export default class Prompt extends View {
   submit() {
     const p = props();
     if (!p.agentKey) return;
-    const names = { ...(shared("tron.agent.names") ?? {}) };
+    const names = { ...(shared("zro.agent.names") ?? {}) };
     const name = this.text.trim();
     if (name) names[p.agentKey] = name; else delete names[p.agentKey];
-    setShared("tron.agent.names", names);
+    setShared("zro.agent.names", names);
     closeOverlay(p.overlay);
   }
 

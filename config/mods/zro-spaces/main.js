@@ -124,7 +124,7 @@ export default class Spaces extends View {
     for (const item of list) item.app = apps.get(item.address) || item.app;
     cx.spawn(async cx => {
       try {
-        const r = await exec("python3", [`${appHome()}/mods/tron-spaces/usage.py`, JSON.stringify(list), appHome()], { timeout: 10000 });
+        const r = await exec("python3", [`${appHome()}/mods/zro-spaces/usage.py`, JSON.stringify(list), appHome()], { timeout: 10000 });
         this.usage = r.code === 0 ? JSON.parse(r.stdout) : {};
       } catch { this.usage = {}; }
       finally { this.usageBusy = false; cx.notify(); }
@@ -403,7 +403,7 @@ export default class Spaces extends View {
           visit(allAgents.find(k => k.address === child.address) ?? child, depth + 1, visited);
         }
       };
-      const folded = !collapsed && Boolean((shared("tron.spaces.folded") ?? {})[r.w.id]);
+      const folded = !collapsed && Boolean((shared("zro.spaces.folded") ?? {})[r.w.id]);
       if (!folded) members.filter(a => !nested(a)).forEach(a => visit(a, 0));
       return v_flex().flex_none().child(collapsed ? this.compact(r, t) : this.row(r, t)).children(rows);
     };
@@ -515,7 +515,7 @@ export default class Spaces extends View {
 
   row({ w, i, g, tree }, t) {
     const on = w.active;
-    const folded = Boolean((shared("tron.spaces.folded") ?? {})[w.id]);
+    const folded = Boolean((shared("zro.spaces.folded") ?? {})[w.id]);
     const foldable = Boolean(g?.linked) || agents().some(a => a.space === w.id);
     const fromIndex = this.pressed === null ? -1 : spaces().findIndex(s => s.id === this.pressed);
     const colors = shared("space.colors") ?? {};
@@ -577,9 +577,9 @@ export default class Spaces extends View {
             .on_mouse_up("left", (_e, cx) => { cx.stop_propagation(); this.pressed = null; this.over = null; })
             .on_click((_e, cx) => {
               cx.stop_propagation();
-              const state = { ...(shared("tron.spaces.folded") ?? {}) };
+              const state = { ...(shared("zro.spaces.folded") ?? {}) };
               if (state[w.id]) delete state[w.id]; else state[w.id] = true;
-              setShared("tron.spaces.folded", state);
+              setShared("zro.spaces.folded", state);
               cx.notify();
             })
             .child(svg(`mods/workspace-chrome/chevron-${folded ? "right" : "down"}.svg`).size(11))))
@@ -663,7 +663,7 @@ export default class Spaces extends View {
     const name = a.program?.name || a.template || "Agent";
     const detail = (a.title || a.name || "").replace(/^\[ [!.] \] /, "").trim();
     const agentKey = a.address;
-    const customName = (shared("tron.agent.names") ?? {})[agentKey];
+    const customName = (shared("zro.agent.names") ?? {})[agentKey];
     const label = customName || (detail && detail !== name && detail !== a.address ? detail : (a.name || a.address));
     const renameMenu = (_e, cx) => {
       cx.stop_propagation();
